@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Article from './Article';
+import Counter from './Counter';
 
 function App() {
   const articles = [
@@ -20,9 +21,25 @@ function App() {
   }
 ];
 
+  const [publication, setPublication] = useState(0);
+
+  function backward() {
+    setPublication(publication - 1);
+  }
+
+  function forward() {
+    setPublication(publication + 1);
+  }
+
   return (
     <Fragment>
-      <Article {...articles[0]} />
+      <Article {...articles[publication]} />
+      <Counter
+        publication={publication}
+        publications={articles.length}
+        backward={backward}
+        forward={forward}
+      />
     </Fragment>
   );
 }
